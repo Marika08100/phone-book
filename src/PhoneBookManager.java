@@ -49,14 +49,14 @@ public class PhoneBookManager {
         System.out.println("Phone book entries: ");
         phoneBook.entrySet();
         for (Map.Entry<String, Contact> actual : phoneBook.entrySet()) {
-            System.out.println(actual.getKey() + ": " + actual.getValue().getPhoneNumber());
+//            System.out.println(actual.getKey() + ": " + actual.getValue().getPhoneNumber());
+            System.out.println(actual.getValue());
         }
 
 
     }
 
     private void addContact() {
-        Map<String, Contact> addContact = new HashMap<>();
         // TODO olvasd be egy változóba a kontakt nevét
         System.out.println("Contact name: ");
         String name = scanner.nextLine();
@@ -67,8 +67,9 @@ public class PhoneBookManager {
         // TODO példányosíts ezekből az adatokból egy Contact-ot
         // TODO tedd bele ezeket az infókat a mapbe:
         //      mi lesz a kulcs és mi az érték?
+
         Contact contact = new Contact(name, phoneNumber);
-        phoneBook.put(name, contact);
+        this.phoneBook.put(name, contact);
         System.out.println("Contact added successfully!");
         System.out.println("Name: " + name);
         System.out.println("Phone number: " + phoneNumber);
@@ -79,6 +80,7 @@ public class PhoneBookManager {
         // TODO valósítsd meg a név alapján való keresést
         System.out.print("Enter name to search: ");
         String searchName = scanner.nextLine();
+   //     Contact contact1 = phoneBook.getOrDefault(searchName,new Contact("Contact","not found"));
         if (phoneBook.containsKey(searchName)) {
             Contact contact = phoneBook.get(searchName);
             String name = contact.getName();
@@ -90,8 +92,6 @@ public class PhoneBookManager {
         } else {
             System.out.println("Contact not found! ");
         }
-
-
         //  ha nem találod meg az adott kontaktot, jelezd
         //  azt is a felhasználónak!
     }
