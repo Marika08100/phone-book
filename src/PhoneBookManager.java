@@ -3,8 +3,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class PhoneBookManager {
-    private Map<String, Contact> phoneBook;
-    private Scanner scanner;
+    private final Map<String, Contact> phoneBook;
+    private final Scanner scanner;
 
     public PhoneBookManager() {
         phoneBook = new HashMap<>();
@@ -47,22 +47,16 @@ public class PhoneBookManager {
     private void listContacts() {
         // TODO Szépen formázva írd ki a telefonkönyv összes bejegyzését!
         System.out.println("Phone book entries: ");
-
-        for (Contact contact : phoneBook.values()) {
-            String name = contact.getName();
-            String phoneNumber = contact.getPhoneNumber();
-
-            System.out.println("Name: " + name );
-            System.out.println("Phone number: " + phoneNumber);
-            System.out.println();
+        phoneBook.entrySet();
+        for (Map.Entry<String, Contact> actual : phoneBook.entrySet()) {
+            System.out.println(actual.getKey() + ": " + actual.getValue().getPhoneNumber());
         }
 
 
     }
 
     private void addContact() {
-         Map<String,String> phoneBook = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
+        Map<String, Contact> addContact = new HashMap<>();
         // TODO olvasd be egy változóba a kontakt nevét
         System.out.println("Contact name: ");
         String name = scanner.nextLine();
@@ -74,7 +68,7 @@ public class PhoneBookManager {
         // TODO tedd bele ezeket az infókat a mapbe:
         //      mi lesz a kulcs és mi az érték?
         Contact contact = new Contact(name, phoneNumber);
-        phoneBook.put(name,phoneNumber);
+        phoneBook.put(name, contact);
         System.out.println("Contact added successfully!");
         System.out.println("Name: " + name);
         System.out.println("Phone number: " + phoneNumber);
@@ -85,7 +79,7 @@ public class PhoneBookManager {
         // TODO valósítsd meg a név alapján való keresést
         System.out.print("Enter name to search: ");
         String searchName = scanner.nextLine();
-        if(phoneBook.containsKey(searchName)){
+        if (phoneBook.containsKey(searchName)) {
             Contact contact = phoneBook.get(searchName);
             String name = contact.getName();
             String phoneNumber = contact.getPhoneNumber();
@@ -93,7 +87,7 @@ public class PhoneBookManager {
             System.out.println("Contact found: ");
             System.out.println("Name: " + name);
             System.out.println("Phone number: " + phoneNumber);
-        }else{
+        } else {
             System.out.println("Contact not found! ");
         }
 
@@ -108,10 +102,10 @@ public class PhoneBookManager {
         //  azt is a felhasználónak!
         System.out.println("Enter name to remove: ");
         String removeName = scanner.nextLine();
-        if(phoneBook.containsKey(removeName)){
+        if (phoneBook.containsKey(removeName)) {
             phoneBook.remove(removeName);
             System.out.println("Contact removed successfully!");
-        }else{
+        } else {
             System.out.println("Contact not found! ");
         }
 
