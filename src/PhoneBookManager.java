@@ -27,11 +27,16 @@ public class PhoneBookManager {
                 case 2 -> removeContact();
                 case 3 -> searchContact();
                 case 4 -> listContacts();
-                case 5 -> System.out.println("Exit...");
-                default -> System.out.println("Invalid choice");
+                case 5 -> {
+                    System.out.println("Exit...");
+                    scanner.close();
+                    return;
+                }
+                default -> System.out.println("Invalid choice. Try again.");
+
             }
         }
-        scanner.close();
+
     }
 
     private void printMenu() {
@@ -80,7 +85,9 @@ public class PhoneBookManager {
         // TODO valósítsd meg a név alapján való keresést
         System.out.print("Enter name to search: ");
         String searchName = scanner.nextLine();
-   //     Contact contact1 = phoneBook.getOrDefault(searchName,new Contact("Contact","not found"));
+        //     Contact contact1 = phoneBook.getOrDefault(searchName,new Contact("Contact","not found"));
+        //  System.out.println(contact1); <-- exp.getOrDefault
+
         if (phoneBook.containsKey(searchName)) {
             Contact contact = phoneBook.get(searchName);
             String name = contact.getName();
